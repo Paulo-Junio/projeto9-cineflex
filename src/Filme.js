@@ -5,14 +5,15 @@ import { Link } from "react-router-dom";
 
 function RenderizarHorarios({horarios}){
     const {id, weekday, date, showtimes} = horarios;
+    console.log(showtimes)
     return (<>
         <div className="horarios">
             <span>{`${weekday} - ${date}`}</span>
             <div className='opcoes'>
-                <Link to={`/sessao/${id}`}>
+                <Link to={`/sessao/${showtimes[0].id}` }>
                     <button>{showtimes[0].name}</button>
                 </Link>
-                <Link to={`/sessa/${id}`}>
+                <Link to={`/sessao/${showtimes[0].id}`}>
                     <button>{showtimes[1].name}</button>
                 </Link>
             </div>
@@ -22,11 +23,15 @@ function RenderizarHorarios({horarios}){
 export default function Filme(){
     const {idFilme} = useParams();
     const [horarios, setHorarios] = useState([]);
-   console.log(horarios)
+    const [dados, setDados] = useState({})
 
+    function Armazenar(resposta){
+        setHorarios(resposta.data.days);
+        setDados(resposta.data)
+    }
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${idFilme}/showtimes`)
-        promise.then( resposta => setHorarios(resposta.data.days));
+        promise.then(resposta => Armazenar(resposta));
     },[]);
 
     return(
@@ -40,6 +45,12 @@ export default function Filme(){
             <div className='container'>
                 {horarios.map((dia, index )=> <RenderizarHorarios key={index} horarios={dia}/>)}
             </div> 
+            <div className='rodape'>
+                <div className='box-rodape'>
+                    <img src={dados.posterURL}/>
+                </div>
+                <span>{dados.title}</span>
+            </div>
         </>
     )
 }
