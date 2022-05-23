@@ -17,7 +17,7 @@ export default function App() {
                 <Route path="/" element={<Listagem />} />
                 <Route path="/filme/:idFilme" element={<Filme/>} />
                 <Route path="/sessao/:idSessao" element={<Sessao />} />
-                <Route path="/sucasso" element={<Sucesso />} />
+                <Route path="/sucesso" element={<Sucesso />} />
             </Routes>
         </BrowserRouter>
     )

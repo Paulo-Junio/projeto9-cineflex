@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 function RenderizarHorarios({horarios}){
     const {id, weekday, date, showtimes} = horarios;
-    console.log(showtimes)
     return (<>
         <div className="horarios">
             <span>{`${weekday} - ${date}`}</span>
