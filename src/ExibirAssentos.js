@@ -6,12 +6,13 @@ import Formulario from './Formulario';
 
 
 
-function Filtrar(setDisponivel, clicados,id, disponivel,setClicados){
+function Filtrar(setDisponivel, clicados,name, disponivel){
     if (disponivel === "disponivel"){
+        clicados.push(name)
+        console.log("clicados: ", clicados)
         setDisponivel("selecionado")
     } else {
-        let novo = clicados.splice(clicados.indexOf(id),1)
-
+        clicados.splice(clicados.indexOf(name),1)
         setDisponivel("disponivel")
     }
 }
@@ -23,14 +24,14 @@ function RenderizarAssentos({assento,clicados}){
 
     if (disponivel ==="selecionado"){
         return(
-            <div className={disponivel} onClick={()=>Filtrar(setDisponivel, clicados,id, disponivel)}>
+            <div className={disponivel} onClick={()=>Filtrar(setDisponivel, clicados,name, disponivel)}>
             <p>{name}</p>
         </div>
         )
     }
     else if (isAvailable){
         return(
-            <div className={disponivel} onClick={()=>Filtrar(setDisponivel, clicados,id, disponivel)}>
+            <div className={disponivel} onClick={()=>Filtrar(setDisponivel, clicados,name, disponivel)}>
             <p>{name}</p>
         </div>
         )
